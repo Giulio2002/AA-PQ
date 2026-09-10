@@ -1,0 +1,10 @@
+node_modules/
+account-abstraction/
+.env
+.env.*
+!.env.example
+*.mnemonic
+*.tar.gz
+*-wallet.json
+deployments.local.json
+.DS_Store

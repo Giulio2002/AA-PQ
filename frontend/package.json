@@ -1,0 +1,11 @@
+{
+  "name": "kurtosis-aa-devnet-frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "ethers": "6.17.0"
+  }
+}

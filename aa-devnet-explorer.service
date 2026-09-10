@@ -1,0 +1,19 @@
+[Unit]
+Description=AA PQ read-only blockchain explorer
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/kurtosis-aa-devnet/explorer
+Environment=PORT=3001
+Environment=RPC_URL=http://127.0.0.1:32773
+Environment=ENTRY_POINT=0x433709009B8330FDa32311DF1C2AFA402eD8D009
+ExecStart=/usr/bin/node /opt/kurtosis-aa-devnet/explorer/server.mjs
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

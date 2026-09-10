@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AA PQ testnet</title><link rel="stylesheet" href="/wallet.css">
+</head>
+<body class="onboarding">
+  <header><nav class="shell"><a class="brand" href="#"><span class="logo">AA</span>AA PQ testnet</a><div class="nav-links"><a class="active" href="#">Wallet</a><a href="#sendPanel" id="navSend">Send</a><a href="#settings" id="navSettings">Settings</a></div><span class="network"><i id="networkDot"></i><span id="networkStatus">Connecting</span></span></nav></header>
+  <main class="shell">
+    <section id="welcome" class="card welcome" aria-labelledby="welcomeTitle">
+      <span class="welcome-logo" aria-hidden="true">AA</span>
+      <p class="eyebrow">WELCOME TO AA PQ TESTNET</p>
+      <h1 id="welcomeTitle">Create your AA wallet</h1>
+      <p class="muted">Your own smart account. No wallet extension.<br>Every outgoing transaction uses account abstraction.</p>
+      <ol class="setup-steps"><li><span>1</span>Create a signing key in this browser</li><li><span>2</span>Deploy your smart account through the bundler</li><li><span>3</span>Start with test ETH, ready to send</li></ol>
+      <button id="createAa" class="primary" disabled>Create AA wallet</button>
+      <p class="intro">Testnet only. Save a key backup after creation.<br>Your key stays in this browser; clearing its data can lose access.</p>
+      <div id="setupStatus" class="wallet-status" role="status" aria-live="polite">Checking for an existing AA wallet…</div>
+    </section>
+    <div class="page-title"><div><p class="eyebrow">YOUR SMART ACCOUNT</p><h1>My wallet</h1><p class="muted">One wallet. Every transaction through account abstraction.</p></div><span class="pill">ERC-4337</span></div>
+    <section class="card balance-card" aria-label="AA wallet">
+      <div class="account-pill"><span class="avatar"></span><span>Account 1</span><span class="algorithm">Smart account</span></div>
+      <button id="copyAddress" class="address-button" disabled title="Copy smart account address"><span id="aaAddress">Create your first AA wallet</span><span aria-hidden="true">⧉</span></button>
+      <div class="balance"><span id="balance">0.0000</span> <span class="unit">ETH</span></div><p class="muted balance-note">Test ETH · No monetary value</p>
+      <p id="intro" class="intro">Your signing key is generated in this browser.<br>No extension or external wallet needed.</p>
+      <div id="aaStatus" class="wallet-status" role="status" aria-live="polite">Ready to create your smart account.</div>
+    </section>
+    <section class="actions" aria-label="Wallet actions">
+      <button id="openSend" class="card action" disabled><span class="icon blue">↑</span><span><strong>Send ETH</strong><small>Send from your AA wallet</small></span><span class="arrow">↗</span></button>
+      <button id="fundAa" class="card action" disabled><span class="icon purple">↓</span><span><strong>Get test ETH</strong><small>Add 1 ETH to this account</small></span><span class="arrow">↗</span></button>
+      <button id="backupAa" class="card action" disabled><span class="icon neutral">⧉</span><span><strong>Back up wallet</strong><small>Download your owner key</small></span><span class="arrow">↗</span></button>
+    </section>
+    <section id="sendPanel" class="card" hidden>
+      <div class="section-heading"><div><h2>Send ETH</h2><p class="muted">Signed locally. Submitted as an AA UserOperation.</p></div><button id="closeSend" class="text-button" aria-label="Close send form">✕</button></div>
+      <form id="sendForm"><label for="sendTo">Recipient address</label><input id="sendTo" placeholder="0x…" required autocomplete="off" spellcheck="false"><label for="sendAmount">Amount (ETH)</label><input id="sendAmount" placeholder="0.01" inputmode="decimal" required><p class="muted small">Keep a little ETH in your wallet for network fees.</p><button id="send" class="primary" type="submit" disabled>Send from AA wallet</button><div id="sendStatus" class="wallet-status" role="status" aria-live="polite"></div></form>
+    </section>
+    <section class="card assets"><div class="section-heading"><h2>Assets</h2><span class="muted small">AA PQ testnet</span></div><div class="asset-row"><span class="eth-icon">Ξ</span><div><strong>Ethereum</strong><small class="muted">ETH</small></div><div class="asset-value"><strong><span id="assetBalance">0.0000</span> ETH</strong><small class="muted">Testnet asset</small></div></div></section>
+    <section class="card"><div class="section-heading"><h2>Activity</h2><span class="muted small">This browser</span></div><div id="activity"><div class="empty"><span class="empty-icon">↗</span><h3>No activity yet</h3><p>Create your wallet, get test ETH, and make your first AA transfer.</p></div></div></section>
+    <section id="settings" class="card" hidden><h1>Settings</h1><p class="muted">Manage your AA wallet and keep access to your account.</p><div class="details-content"><h2>Account details</h2><label>Smart account address</label><code id="fullAddress">Not created yet</code><label>Owner address</label><code id="ownerAddress">Not created yet</code><label>Network</label><p>AA PQ testnet · Chain 1337 · ERC-4337</p><h2>Wallet backup</h2><p class="muted small">Download your owner key and store it somewhere private. Anyone with this key can control your smart account.</p><button id="settingsBackup" class="primary">Download wallet backup</button><p class="notice">For testing only. The owner key is stored unencrypted in this browser; download a backup before clearing browser data. This site uses HTTP—never use a valuable key or real funds here.</p><p class="muted small">This wallet uses ECDSA signatures, not post-quantum cryptography. “AA PQ testnet” is the network name.</p></div></section>
+    <footer><span>AA PQ testnet <span class="separator">/</span> Chain 1337</span><a id="explorerLink" href="http://157.180.109.133:3001" target="_blank" rel="noopener">Open explorer ↗</a><span>Powered by ERC-4337</span></footer>
+  </main>
+  <script type="module" src="/aa-wallet.js"></script>
+</body>
+</html>
