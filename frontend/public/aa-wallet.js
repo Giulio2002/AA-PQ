@@ -28,6 +28,7 @@ window.addEventListener('hashchange', () => setView(location.hash.slice(1)));
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 const short = address => `${address.slice(0, 8)}…${address.slice(-6)}`;
 function status(message, error = false) {
+  for (const id of ['aaStatus','setupStatus','sendStatus']) $(id).classList.remove('success');
   $('aaStatus').textContent = message;
   $('aaStatus').classList.toggle('error', error);
   $('setupStatus').textContent = message;
@@ -156,6 +157,8 @@ $('navSettings').onclick = event => {event.preventDefault(); navigate('settings'
 document.querySelector('.nav-links a').onclick = event => {event.preventDefault(); navigate('wallet');};
 document.querySelector('.brand').onclick = event => {event.preventDefault(); navigate('wallet');};
 $('closeSend').onclick = () => navigate('wallet');
+$('closeSuccess').onclick = () => $('sendSuccess').close();
+$('sendSuccess').addEventListener('close', () => $('openSend').focus());
 $('sendForm').onsubmit = event => {
   event.preventDefault();
   run(async () => {
@@ -168,8 +171,16 @@ $('sendForm').onsubmit = event => {
     if (parseEther(state.balance) < parseEther(amount) + 1200000000000000n) throw new Error('Insufficient ETH for this transfer and network fees. Get test ETH or reduce the amount.');
     const hash = await submit(state);
     record('Sent ETH via AA', hash, amount);
-    await refresh(); status(`Sent ${amount} ETH from your AA wallet.`);
+    // Confirmation is final even if a subsequent balance refresh is unavailable.
+    let refreshed = true;
+    try {await refresh();} catch {refreshed = false;}
+    status(`Sent ${amount} ETH from your AA wallet.${refreshed ? '' : ' Balance refresh is temporarily unavailable.'}`);
+    for (const id of ['aaStatus','sendStatus']) $(id).classList.add('success');
     $('sendForm').reset();
+    navigate('wallet');
+    $('successMessage').textContent = `${amount} ETH sent to ${short(recipient)}.`;
+    $('successReceipt').href = `${explorerUrl.href}#tx/${hash}`;
+    $('sendSuccess').showModal();
   });
 };
 $('backupAa').onclick = () => {
