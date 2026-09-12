@@ -1,0 +1,19 @@
+[Unit]
+Description=AA-PQ wallet and faucet
+After=network-online.target docker.service aa-pq-network.service
+Wants=network-online.target
+Requires=aa-pq-network.service
+
+[Service]
+User=Giulio2002
+WorkingDirectory=/opt/aa-pq/app
+EnvironmentFile=/opt/aa-pq/app/.env
+Environment=PORT=3000
+ExecStart=/opt/aa-pq/node-v22.23.2-linux-x64/bin/node /opt/aa-pq/app/frontend/server.mjs
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

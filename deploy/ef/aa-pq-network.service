@@ -1,0 +1,14 @@
+[Unit]
+Description=Restrict AA-PQ container RPC access
+After=docker.service
+Requires=docker.service
+PartOf=docker.service
+Before=aa-pq-wallet.service aa-pq-explorer.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /opt/aa-pq/app/deploy/ef/protect-network.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

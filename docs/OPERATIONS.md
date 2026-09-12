@@ -45,6 +45,9 @@ unauthenticated faucet are intended for disposable testnets.
 
 ## Validation scope
 
-Wallet and explorer dependency installation, live AA transactions, and browser
-flows have been tested. The complete Kurtosis setup sequence has not been
-replayed on a clean host. See `docs/VERIFICATION.md` for recorded results.
+The complete setup was deployed on a fresh Debian 13 host on 2026-09-12:
+Kurtosis network creation, pinned contract compilation and deployment, Alto,
+wallet, and explorer. Live AA tests passed, including invalid-signature and
+replay rejection. See `docs/VERIFICATION.md` for earlier recorded results and
+`deploy/ef/README.md` for the systemd configuration. Host reboot recovery is
+configured but was not tested with a full reboot.
